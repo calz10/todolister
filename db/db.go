@@ -12,6 +12,7 @@ import (
 func Start() *gorm.DB {
 	connString := os.Getenv(constants.CONN_URI)
 	db, _ := gorm.Open("postgres", connString)
+
 	defer db.Close()
 
 	db.CreateTable(schemas.User{})
