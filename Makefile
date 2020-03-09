@@ -15,8 +15,8 @@ BUILD=$(GOBUILD) -o $(BUILD_FILE) $(CMD_PATH)/$(CMD_FILE)
 
 
 # Environment variables for build mode
-DEV_MODE=ENV_MODE=DEVELOPMENT
-PROD_MODE=ENV_MODE=PRODUCTION
+DEV_MODE=ENV_MODE=development
+PROD_MODE=ENV_MODE=production
 
 
 # Builds
