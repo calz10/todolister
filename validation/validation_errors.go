@@ -9,7 +9,7 @@ type ValidationError struct {
 // ErrorsMap error codes for invalid inputs for code 500+
 // Taking field name as first key and validation tag as second key returning the error code
 // All map field keys must be in lowercase
-const ValidationErrorsMap = map[string]map[string]ValidationError{
+var ValidationErrorsMap = map[string]map[string]ValidationError{
 	"username": {
 		"required": ValidationError{
 			Message: "First Name is required",
@@ -60,6 +60,6 @@ const ValidationErrorsMap = map[string]map[string]ValidationError{
 		"max": ValidationError{
 			Message: "Password must not exceed 32 characters in length",
 			Field:   "Password",
-		}
-	}
+		},
+	},
 }

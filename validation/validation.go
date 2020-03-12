@@ -11,15 +11,14 @@ import (
 var validate = validator.New()
 
 // Validate validates data
-func Validate(item interface{}) []ValidationError {
-	var validationErrors []ValidationErrorsMap
+func Validate(item interface{}) ([]ValidationError, bool) {
+	var validationErrors []ValidationError
 
 	err := validate.Struct(item)
-
 	if err != nil {
 		if _, ok := err.(*validator.InvalidValidationError); ok {
 			fmt.Println(err)
-			return validationErrors
+			return validationErrors, true
 		}
 
 		for _, err := range err.(validator.ValidationErrors) {
@@ -29,7 +28,9 @@ func Validate(item interface{}) []ValidationError {
 			validationErrors = append(validationErrors, validationError)
 		}
 
+		return validationErrors, true
+
 	}
 
-	return validationErrors
+	return validationErrors, false
 }
