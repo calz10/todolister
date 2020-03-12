@@ -35,5 +35,5 @@ func main() {
 
 	router.Use(cors.New(config))
 
-	router.Run()
+	router.Run(":3001")
 }
