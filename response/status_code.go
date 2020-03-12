@@ -2,9 +2,9 @@ package response
 
 // Status status codes and messages
 type Status struct {
-  Code    int64  `json:"code"`
-  Message string `json:"message"`
-  Success bool 	 `json:"success"`
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+	Success bool   `json:"success"`
 }
 
 // StatusCodes code keys for mapping
@@ -18,122 +18,122 @@ var StatusCodes = []int{
 var StatusMap = map[int]Status{
 	100: Status{
 		Code:    100,
-    	Message: "Continue",
-    	Success: true
+		Message: "Continue",
+		Success: true,
 	},
 	200: Status{
 		Code:    200,
-    	Message: "OK",
-    	Success: true
+		Message: "OK",
+		Success: true,
 	},
 	201: Status{
 		Code:    201,
-    	Message: "Created",
-    	Success: true
+		Message: "Created",
+		Success: true,
 	},
 	202: Status{
 		Code:    202,
-    	Message: "Accepted",
-    	Success: true
+		Message: "Accepted",
+		Success: true,
 	},
 	203: Status{
 		Code:    203,
-    	Message: "Partial Information",
-    	Success: true
+		Message: "Partial Information",
+		Success: true,
 	},
 	204: Status{
 		Code:    204,
 		Message: "No Content",
-    	Success: true
+		Success: true,
 	},
 	300: Status{
 		Code:    300,
 		Message: "Multiple Choices",
-    	Success: true
+		Success: true,
 	},
 	301: Status{
 		Code:    301,
 		Message: "Moved Permanently",
-    	Success: true
+		Success: true,
 	},
 	400: Status{
 		Code:    400,
 		Message: "Bad Request",
-    	Success: false
+		Success: false,
 	},
 	401: Status{
 		Code:    401,
 		Message: "Unauthorized",
-    	Success: false
+		Success: false,
 	},
 	402: Status{
 		Code:    402,
 		Message: "Payment Required",
-    	Success: false
+		Success: false,
 	},
 	403: Status{
 		Code:    403,
 		Message: "Forbidden",
-    	Success: false
+		Success: false,
 	},
 	404: Status{
 		Code:    404,
 		Message: "Not Found",
-    	Success: false
+		Success: false,
 	},
 	405: Status{
 		Code:    405,
 		Message: "Method Not Allowed",
-    	Success: false
+		Success: false,
 	},
 	406: Status{
 		Code:    406,
 		Message: "Not Acceptable",
-    	Success: false
+		Success: false,
 	},
 	407: Status{
 		Code:    407,
 		Message: "Request Time-Out",
-    	Success: false
+		Success: false,
 	},
 	408: Status{
 		Code:    408,
 		Message: "Authentication Failed",
-    	Success: false
+		Success: false,
 	},
 	409: Status{
 		Code:    409,
 		Message: "Email is already used",
-    	Success: false
+		Success: false,
 	},
 	500: Status{
 		Code:    500,
 		Message: "Internal Server Error",
-    	Success: false
+		Success: false,
 	},
 	501: Status{
 		Code:    501,
 		Message: "Not Implemented",
-    	Success: false
+		Success: false,
 	},
 	502: Status{
 		Code:    502,
 		Message: "Bad Gateway",
-    	Success: false
+		Success: false,
 	},
 	503: Status{
 		Code:    503,
 		Message: "Service Unavailable",
-    	Success: false
+		Success: false,
 	},
 	504: Status{
 		Code:    504,
 		Message: "Gateway Timeout",
-    	Success: false
+		Success: false,
 	},
 	600: Status{
 		Code:    600,
 		Message: "Validation Error",
-    	Success: false
+		Success: false,
 	},
 }
