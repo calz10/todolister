@@ -11,4 +11,5 @@ type DbService struct {
 
 func (db *DbService) InitializeApi(router *gin.Engine) {
 	router.POST("/users", db.UserRegistrationHandler)
+	router.POST("/login", db.UserLoginHandler)
 }

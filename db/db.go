@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/calz10/todolister/env/constants"
-	"github.com/calz10/todolister/schemas"
+	"github.com/calz10/todolister/models"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"golang.org/x/crypto/bcrypt"
@@ -17,9 +17,9 @@ func Start() *gorm.DB {
 		defer db.Close()
 	}
 
-	db.AutoMigrate(schemas.Profile{}, schemas.Todo{}, schemas.User{})
+	db.AutoMigrate(models.Profile{}, models.Todo{}, models.User{})
 
-	var adminUser schemas.User
+	var adminUser models.User
 
 	db.Take(&adminUser)
 
@@ -28,7 +28,7 @@ func Start() *gorm.DB {
 		if err != nil {
 			panic(err)
 		}
-		db.Create(&schemas.User{Email: "todolistser@gmail.com", Password: string(hash), Username: "todolisteradmin"})
+		db.Create(&models.User{Email: "todolistser@gmail.com", Password: string(hash), Username: "todolisteradmin"})
 	}
 
 	return db

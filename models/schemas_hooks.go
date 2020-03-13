@@ -1,4 +1,4 @@
-package schemas
+package models
 
 import (
 	"fmt"
@@ -15,7 +15,7 @@ import (
 // AfterCreate user hooks
 func (u *User) AfterCreate(scope *gorm.Scope) (err error) {
 	if u.ID > 0 {
-		scope.DB().Create(Profile{UserId: fmt.Sprint(u.ID)})
+		scope.DB().Create(&Profile{UserId: fmt.Sprint(u.ID)})
 	}
 
 	return

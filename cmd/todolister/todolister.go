@@ -32,7 +32,6 @@ func main() {
 	config.AllowHeaders = []string{"Access-Control-Allow-Origin", "Authorization", "Origin", "Content-Type"}
 
 	dbService.InitializeApi(router)
-
 	router.Use(cors.New(config))
 
 	router.Run(":3001")

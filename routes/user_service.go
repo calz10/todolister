@@ -1,9 +1,9 @@
 package routes
 
 import (
+	"github.com/calz10/todolister/models"
 	"github.com/calz10/todolister/request"
 	"github.com/calz10/todolister/response"
-	"github.com/calz10/todolister/schemas"
 	"github.com/calz10/todolister/validation"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -36,7 +36,7 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 		statusCode = response.ValidationErr
 	} else {
 
-		var userSchema schemas.User
+		var userSchema models.User
 		db.Where("email = ?", request.Email).Or("username = ?", request.Username).Find(&userSchema)
 
 		if userSchema.Username != "" {
@@ -45,7 +45,7 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 			var customedResponse response.Status
 			customedResponse = response.StatusMap[statusCode]
 
-			customedResponse.Message = "Either email or username was already taken"
+			customedResponse.Message = "Email or username was already taken"
 
 			c.JSON(statusCode, response.Response{
 				ResponseStatus: customedResponse,
@@ -55,9 +55,9 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 			return
 		} else {
 			hash, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
-			err := db.Create(&schemas.User{Email: request.Email, Password: string(hash), Username: request.Username})
+			err := db.Create(&models.User{Email: request.Email, Password: string(hash), Username: request.Username})
 			if err != nil {
-				db.Take(&userSchema, &schemas.User{Email: request.Email})
+				db.Take(&userSchema, &models.User{Email: request.Email})
 				statusCode = response.Created
 				result = response.UserRegistrationResult{
 					Email:    request.Email,
@@ -75,4 +75,10 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 		Success:        response.StatusMap[statusCode].Success,
 	})
 
+}
+
+func (db *DbService) UserLoginHandler(c *gin.Context) {
+	// s := claims.GenerateNewToken("test")
+	// t, _ := claims.VerifyToken(s)
+	// fmt.Println(t)
 }
