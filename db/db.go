@@ -25,15 +25,15 @@ func Start() *gorm.DB {
 
 	db.Take(&adminUser)
 
-	// if adminUser.ID == 0 {
-	hash, err := bcrypt.GenerateFromPassword([]byte("admin1234"), bcrypt.DefaultCost)
+	if adminUser.ID == 0 {
+		hash, err := bcrypt.GenerateFromPassword([]byte("admin1234"), bcrypt.DefaultCost)
 
-	// 	if err != nil {
-	// 		panic(err)
-	// 	}
+		if err != nil {
+			panic(err)
+		}
 
-	db.Create(&User{Email: "todolistser@gmail.com", Password: string(hash), Username: "todolisteradmin"})
-	// }
+		db.Create(&User{Email: "todolistser@gmail.com", Password: string(hash), Username: "todolisteradmin"})
+	}
 
 	return db
 }
