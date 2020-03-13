@@ -36,7 +36,7 @@ const (
 	// AuthFailed status constant
 	AuthFailed = 408
 	// EmailUsedErr status constant
-	EmailUsedErr = 409
+	ExistingData = 409
 	// InternalServerErr status constant
 	InternalServerErr = 500
 	// NotImplemented status constant
