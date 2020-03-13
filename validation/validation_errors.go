@@ -40,7 +40,7 @@ var ValidationErrorsMap = map[string]map[string]ValidationError{
 			Field:   "Password",
 		},
 		"min": ValidationError{
-			Message: "Password must have at least 6 characters in length",
+			Message: "Password must have at least 8 characters in length",
 			Field:   "Password",
 		},
 		"max": ValidationError{
