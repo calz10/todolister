@@ -4,7 +4,7 @@ package response
 type Status struct {
 	Code    int64  `json:"code"`
 	Message string `json:"message"`
-	Success bool   `json:"success"`
+	Success bool   `json:"-"`
 }
 
 // StatusCodes code keys for mapping

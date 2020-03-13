@@ -1,13 +1,12 @@
 package routes
 
 import (
-	"fmt"
-
 	"github.com/calz10/todolister/request"
 	"github.com/calz10/todolister/response"
 	"github.com/calz10/todolister/schemas"
 	"github.com/calz10/todolister/validation"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // UserRegistrationHandler
@@ -16,6 +15,17 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 	var result interface{}
 	var errors interface{}
 	var statusCode int
+
+	defer func() {
+		if err := recover(); err != nil {
+			statusCode = 500
+
+			c.JSON(statusCode, response.Response{
+				ResponseStatus: response.StatusMap[statusCode],
+				Errors:         err,
+			})
+		}
+	}()
 
 	c.BindJSON(&request)
 
@@ -27,7 +37,7 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 	} else {
 
 		var userSchema schemas.User
-		db.Where("email=?", request.Email).Or("username=?", request.Username).Find(&userSchema)
+		db.Where("email = ?", request.Email).Or("username = ?", request.Username).Find(&userSchema)
 
 		if userSchema.Username != "" {
 			statusCode = response.ExistingData
@@ -44,7 +54,17 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 			})
 			return
 		} else {
-			fmt.Print(request)
+			hash, _ := bcrypt.GenerateFromPassword([]byte(request.Password), bcrypt.DefaultCost)
+			err := db.Create(&schemas.User{Email: request.Email, Password: string(hash), Username: request.Username})
+			if err != nil {
+				db.Take(&userSchema, &schemas.User{Email: request.Email})
+				statusCode = response.Created
+				result = response.UserRegistrationResult{
+					Email:    request.Email,
+					Username: request.Username,
+					ID:       int(userSchema.ID),
+				}
+			}
 		}
 	}
 
@@ -52,6 +72,7 @@ func (db *DbService) UserRegistrationHandler(c *gin.Context) {
 		ResponseStatus: response.StatusMap[statusCode],
 		Errors:         errors,
 		Result:         result,
+		Success:        response.StatusMap[statusCode].Success,
 	})
 
 }
