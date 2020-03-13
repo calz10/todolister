@@ -1,7 +1,7 @@
 package response
 
 type Response struct {
-	ResponseStatus Status
-	Errors         interface{}
-	Result         interface{}
+	ResponseStatus Status      `json:"status"`
+	Errors         interface{} `json:"errors"`
+	Result         interface{} `json:"result"`
 }

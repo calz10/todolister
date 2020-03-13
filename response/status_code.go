@@ -103,7 +103,7 @@ var StatusMap = map[int]Status{
 	},
 	409: Status{
 		Code:    409,
-		Message: "Email is already used",
+		Message: "Data already exist",
 		Success: false,
 	},
 	500: Status{
