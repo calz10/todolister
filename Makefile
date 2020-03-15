@@ -26,3 +26,5 @@ run-dev:
 	$(DEV_MODE) $(RUN)
 run-prod:
 	$(PROD_MODE) $(RUN)
+run-build:
+	$(PROD_MODE) $(BUILD_FILE)

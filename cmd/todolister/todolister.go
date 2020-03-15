@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -16,7 +17,10 @@ import (
 
 func init() {
 	envMode := os.Getenv(constants.ENV_MODE)
+	envKey := os.Getenv(constants.JWT_KEY)
 	envFile := ".env." + envMode
+	fmt.Print(envFile, "<<<==== env file")
+	fmt.Print(envKey, "<<<==== env ke")
 	if err := godotenv.Load(envFile); err != nil {
 		log.Print("No .env file found")
 	}
@@ -34,5 +38,5 @@ func main() {
 	dbService.InitializeApi(router)
 	router.Use(cors.New(config))
 
-	router.Run(":3001")
+	router.Run()
 }
